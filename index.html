@@ -15,6 +15,7 @@
             font-family: 'Input';
             src: url("./InputMonoNarrow-Regular.ttf");
         }
+
         body {
             /*font-family: 'Open Sans', sans-serif;*/
             font-family: 'Input', sans-serif;
@@ -61,7 +62,7 @@
         const container = document.querySelector(".container")
         value.forEach(e => {
             const element = document.createElement("a");
-            element.setAttribute("href", e.name);
+            element.setAttribute("href", `https://${e.name});
             element.setAttribute("class", "app");
             element.innerText = e.name;
             container.appendChild(element);
