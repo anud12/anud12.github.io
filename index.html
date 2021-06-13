@@ -7,14 +7,17 @@
     <title>Anud</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
           integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
     <style>
+        @font-face {
+            font-family: 'Input';
+            src: url("./InputMonoNarrow-Regular.ttf");
+        }
         body {
-            font-family: 'Open Sans', sans-serif;
+            /*font-family: 'Open Sans', sans-serif;*/
+            font-family: 'Input', sans-serif;
             font-size: 1.2em;
             display: flex;
             flex-direction: column;
@@ -25,11 +28,9 @@
             padding: 1em 1em;
         }
 
-        .response {
+        .container {
             display: flex;
             flex-direction: row;
-            flex-grow: 0.25;
-            flex-shrink: 0.25;
             flex-wrap: wrap;
             justify-content: center;
             margin: -0.25em;
@@ -40,6 +41,10 @@
             display: block;
             padding: 1.75em;
             margin: 0.5em;
+            max-width: 250px;
+            flex-grow: 1;
+            flex-shrink: 0;
+            text-align: center;
             border: 1px solid #ccc;
             text-decoration: none;
         }
@@ -47,17 +52,18 @@
 </head>
 <body>
 <h1>Hello Anud.ro</h1>
-<div class="response"></div>
+<div class="container"></div>
 
 <script>
     fetch("http://main.anud.ro:3000")
     .then(async e => await e.json())
     .then(value => {
+        const container = document.querySelector(".container")
         value.forEach(e => {
             const element = document.createElement("a");
             element.setAttribute("href", e.name);
             element.setAttribute("class", "app");
-            element.innerText = e.name + ` ${i}`;
+            element.innerText = e.name;
             container.appendChild(element);
         })
     })
