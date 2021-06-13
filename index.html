@@ -18,26 +18,27 @@
             font-size: 1.2em;
             display: flex;
             flex-direction: column;
-            padding: 0 2em;
         }
 
         h1 {
             font-size: 2em;
-            padding: 1em 0 ;
+            padding: 1em 1em;
         }
 
         .response {
             display: flex;
             flex-direction: row;
             flex-grow: 0.25;
-            flex-shrink: 0;
+            flex-shrink: 0.25;
             flex-wrap: wrap;
+            justify-content: center;
             margin: -0.25em;
+            padding: 1em;
         }
 
         .app {
-            display: inline-block;
-            padding: 2em;
+            display: block;
+            padding: 1.75em;
             margin: 0.5em;
             border: 1px solid #ccc;
             text-decoration: none;
@@ -53,12 +54,12 @@
     .then(async e => await e.json())
     .then(value => {
         let container = document.querySelector(".response");
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0].forEach(() => {
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0].forEach((e,i) => {
             value.forEach(e => {
                 const element = document.createElement("a");
                 element.setAttribute("href", e.name);
                 element.setAttribute("class", "app");
-                element.innerText = e.name;
+                element.innerText = e.name + ` ${i}`;
                 container.appendChild(element);
             })
         })
