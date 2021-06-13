@@ -17,16 +17,18 @@
         }
 
         body {
-            /*font-family: 'Open Sans', sans-serif;*/
             font-family: 'Input', sans-serif;
             font-size: 1.2em;
             display: flex;
             flex-direction: column;
+            color: #777;
         }
 
         h1 {
             font-size: 2em;
             padding: 1em 1em;
+            color: #fff;
+            background-color: #0063B1;
         }
 
         .container {
@@ -52,7 +54,7 @@
     </style>
 </head>
 <body>
-<h1>Hello Anud.ro</h1>
+<h1>Anud.ro</h1>
 <div class="container"></div>
 
 <script>
@@ -62,7 +64,7 @@
         const container = document.querySelector(".container")
         value.forEach(e => {
             const element = document.createElement("a");
-            element.setAttribute("href", `https://${e.name});
+            element.setAttribute("href", `https://${e.name}`);
             element.setAttribute("class", "app");
             element.innerText = e.name;
             container.appendChild(element);
