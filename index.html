@@ -7,25 +7,61 @@
     <title>Anud</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
+          integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw=="
+          crossorigin="anonymous" referrerpolicy="no-referrer"/>
+    <style>
+        body {
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1.2em;
+            display: flex;
+            flex-direction: column;
+            padding: 0 2em;
+        }
 
+        h1 {
+            font-size: 2em;
+            padding: 1em 0 ;
+        }
+
+        .response {
+            display: flex;
+            flex-direction: row;
+            flex-grow: 0.25;
+            flex-shrink: 0;
+            flex-wrap: wrap;
+            margin: -0.25em;
+        }
+
+        .app {
+            display: inline-block;
+            padding: 2em;
+            margin: 0.5em;
+            border: 1px solid #ccc;
+            text-decoration: none;
+        }
+    </style>
 </head>
-
 <body>
-
-<div>
-    Hello Anud.ro
-</div>
-<div class="response">
-
-</div>
+<h1>Hello Anud.ro</h1>
+<div class="response"></div>
 
 <script>
-    fetch("http://main.anud.ro:3000")
-    .then(async e => await e.text())
+    fetch("http://127.0.0.1:3000")
+    .then(async e => await e.json())
     .then(value => {
-        document.querySelector(".response").innerText = value
+        let container = document.querySelector(".response");
+        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0].forEach(() => {
+            value.forEach(e => {
+                const element = document.createElement("a");
+                element.setAttribute("href", e.name);
+                element.setAttribute("class", "app");
+                element.innerText = e.name;
+                container.appendChild(element);
+            })
+        })
     })
 </script>
 
