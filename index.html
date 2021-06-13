@@ -53,15 +53,12 @@
     fetch("http://main.anud.ro:3000")
     .then(async e => await e.json())
     .then(value => {
-        let container = document.querySelector(".response");
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0].forEach((e,i) => {
-            value.forEach(e => {
-                const element = document.createElement("a");
-                element.setAttribute("href", e.name);
-                element.setAttribute("class", "app");
-                element.innerText = e.name + ` ${i}`;
-                container.appendChild(element);
-            })
+        value.forEach(e => {
+            const element = document.createElement("a");
+            element.setAttribute("href", e.name);
+            element.setAttribute("class", "app");
+            element.innerText = e.name + ` ${i}`;
+            container.appendChild(element);
         })
     })
 </script>
