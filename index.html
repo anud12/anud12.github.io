@@ -19,7 +19,7 @@
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const data = new FormData(document.querySelector('form'));
-
+            console.log(JSON.stringify(Object.fromEntries(formData)));
             console.log(e);
             console.log(gapi.client.drive);
             gapi.client.drive.files.create();
@@ -37,7 +37,7 @@
                     'Authorization': `Bearer ${gapi.client.getToken().access_token}`,
                     'Content-Type': 'text/plain'
                 }),
-                body: JSON.stringify(Object.fromEntries(formData))
+                body: body
             }).then(res => console.log(res))});
 
         })
