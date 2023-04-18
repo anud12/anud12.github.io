@@ -37,16 +37,16 @@ const tokenClientImpl = google.accounts.oauth2.initTokenClient({
 
 const callbackPromise = new Promise((res) => {
     tokenClientImpl.callback = async (resp) => {
+        res()
         if (resp.error !== undefined) {
             throw (resp);
         }
-        res()
     };
 
 })
 
 export default async () => {
-    await( callbackPromise);
+    await callbackPromise;
     if (gapi.client.getToken() === null) {
         // Prompt the user to select a Google Account and ask for consent to share their data
         // when establishing a new session.
