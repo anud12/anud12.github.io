@@ -48,5 +48,5 @@ if (gapi.client.getToken() === null) {
     // Skip display of account chooser and consent dialog for an existing session.
     tokenClient.requestAccessToken({ prompt: '' });
 }
-
-export default {gapi, tokenClient}
+console.log(window);
+export default {tokenClient}
