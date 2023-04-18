@@ -46,6 +46,7 @@ const callbackPromise = new Promise((res) => {
 })
 
 export default async () => {
+    console.log("Google login called");
     await callbackPromise;
     if (gapi.client.getToken() === null) {
         // Prompt the user to select a Google Account and ask for consent to share their data
