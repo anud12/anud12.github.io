@@ -15,12 +15,12 @@
     
     <script type="module">
         import login from './googleLogin.js';
-        const {gapiClient} = await login();
+        const {gapi} = await login();
         console.log("Module Loaded");
         async function listFiles() {
             let response;
             try {
-                response = await gapiClient.client.drive.files.list({
+                response = await gapi.client.drive.files.list({
                     'pageSize': 10,
                     'fields': 'files(id, name)',
                 });
