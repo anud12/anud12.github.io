@@ -2,37 +2,95 @@
 <html lang="en">
 
 <head>
-    <meta name="description" content=""/>
+    <meta name="description" content="" />
     <meta charset="utf-8">
     <title>Anud</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css"
-          integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw=="
-          crossorigin="anonymous" referrerpolicy="no-referrer"/>
-    <script type="module">
-        import all from './googleLogin.js'
-        console.log(all)
+        integrity="sha512-NmLkDIU1C/C88wi324HBc+S2kLhi08PN5GDeUVVVC/BVt/9Izdsc9SVeVfA1UZbY3sHUlDSyRXhCzHfr6hmPPw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script>
+        const CLIENT_ID = '985280907031-ffvfnc8pi0ane99lso9dbl1m2l5oc9nn.apps.googleusercontent.com';
+        const API_KEY = 'AIzaSyBtQ2WOyIUnaSWAhl3s5PA_LZkWtpWz5iA';
+
+        const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest';
+
+        const SCOPES = 'https://www.googleapis.com/auth/drive.metadata.readonly';
+        let tokenClient;
+        let gapiInited = false;
+        let gisInited = false;
+        function gapiLoaded() {
+            gapi.load('client', initializeGapiClient);
+        }
+        async function initializeGapiClient() {
+            await gapi.client.init({
+                apiKey: API_KEY,
+                discoveryDocs: [DISCOVERY_DOC],
+            });
+            gapiInited = true;
+            gisLoaded();
+        }
+        function gisLoaded() {
+            tokenClient = google.accounts.oauth2.initTokenClient({
+                client_id: CLIENT_ID,
+                scope: SCOPES,
+                callback: '', // defined later
+            });
+            gisInited = true;
+            gisLoaded();
+        }
+
+        function gisLoaded() {
+            tokenClient = google.accounts.oauth2.initTokenClient({
+                client_id: CLIENT_ID,
+                scope: SCOPES,
+                callback: '', // defined later
+            });
+            gisInited = true;
+            handleAuthClick();
+        }
+        function handleAuthClick() {
+            tokenClient.callback = async (resp) => {
+                if (resp.error !== undefined) {
+                    throw (resp);
+                }
+                document.getElementById('signout_button').style.visibility = 'visible';
+                document.getElementById('authorize_button').innerText = 'Refresh';
+                await listFiles();
+            };
+
+            if (gapi.client.getToken() === null) {
+                // Prompt the user to select a Google Account and ask for consent to share their data
+                // when establishing a new session.
+                tokenClient.requestAccessToken({ prompt: 'consent' });
+            } else {
+                // Skip display of account chooser and consent dialog for an existing session.
+                tokenClient.requestAccessToken({ prompt: '' });
+            }
+        }
     </script>
 </head>
-<body>
-<h1>Anud.ro</h1>
-<div class="container"></div>
 
-<script>
-    fetch("http://main.anud.ro:3000")
-    .then(async e => await e.json())
-    .then(value => {
-        const container = document.querySelector(".container")
-        value.forEach(e => {
-            const element = document.createElement("a");
-            element.setAttribute("href", `https://${e.name}`);
-            element.setAttribute("class", "app");
-            element.innerText = e.name;
-            container.appendChild(element);
-        })
-    })
-</script>
+<body>
+    <h1>Anud.ro</h1>
+    <div class="container"></div>
+
+    <script>
+        fetch("http://main.anud.ro:3000")
+            .then(async e => await e.json())
+            .then(value => {
+                const container = document.querySelector(".container")
+                value.forEach(e => {
+                    const element = document.createElement("a");
+                    element.setAttribute("href", `https://${e.name}`);
+                    element.setAttribute("class", "app");
+                    element.innerText = e.name;
+                    container.appendChild(element);
+                })
+            })
+    </script>
 
 </body>
+
 </html>
