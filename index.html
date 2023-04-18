@@ -14,10 +14,21 @@
     <script src="https://accounts.google.com/gsi/client"></script> -->
     
     <script type="module" defer>
-        import apis from 'https://apis.google.com/js/api.js';
-        import gapi from 'https://accounts.google.com/gsi/client';
         (async () => {
             console.log("Pre import 2");
+
+            await new Promise(res => {
+                const node = Document.createElement('script');
+                node.attr('src') = 'https://apis.google.com/js/api.js';
+                node.addEventListener('load', res);
+                document.querySelector('head').appendChild(node);
+            })
+            await new Promise(res => {
+                const node = Document.createElement('script');
+                node.attr('src') = 'https://accounts.google.com/gsi/client';
+                node.addEventListener('load', res);
+                document.querySelector('head').appendChild(node);
+            })
             const CLIENT_ID = '985280907031-ffvfnc8pi0ane99lso9dbl1m2l5oc9nn.apps.googleusercontent.com';
             const API_KEY = 'AIzaSyBtQ2WOyIUnaSWAhl3s5PA_LZkWtpWz5iA';
 
