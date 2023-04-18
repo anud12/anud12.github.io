@@ -25,7 +25,7 @@
             })
             await new Promise(res => {
                 const node = document.createElement('script');
-                node.setAttribute('src', 'https://apis.google.com/js/api.js');
+                node.setAttribute('src', 'https://accounts.google.com/gsi/client');
                 node.addEventListener('load', res);
                 document.querySelector('head').appendChild(node);
             })
