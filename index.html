@@ -19,7 +19,8 @@
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             const data = new FormData(document.querySelector('form'));
-            console.log(JSON.stringify(Object.fromEntries(data)));
+            const body = JSON.stringify(Object.fromEntries(data)); 
+            console.log(body);
             console.log(e);
             console.log(gapi.client.drive);
             gapi.client.drive.files.create();
