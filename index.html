@@ -16,35 +16,24 @@
         node.setAttribute('type', 'submit');
         const form = document.querySelector('form');
         form.appendChild(node);
-        form.addEventListener('submit', (e) => {
+        form.addEventListener('submit', async (e) => {
             e.preventDefault();
             console.log(e);
             console.log(gapi.client.drive);
+            gapi.client.drive.files.create();
+            await gapi.client.drive.files.create({
+                resource: {
+                    name: "from browser",
+                    parents: ['1Cn9U7ZJw09ui8zsnkcMbUIeKRp_UJPW3']
+                },
+                media: {
+                    mimeType: 'text/plain',
+                    body: 'Hello world'
+                },
+                fields: 'id'
+            })
         })
 
-        // async function listFiles() {
-        //     let response;
-        //     try {
-        //         response = await gapi.client.drive.files.list({
-        //             'pageSize': 10,
-        //             'fields': 'files(id, name)',
-        //         });
-        //     } catch (err) {
-        //         console.error(err.message);
-        //         return;
-        //     }
-        //     const files = response.result.files;
-        //     if (!files || files.length == 0) {
-        //         console.log('No files found.');
-        //         return;
-        //     }
-        //     // Flatten to string to display
-        //     const output = files.reduce(
-        //         (str, file) => `${str}${file.name} (${file.id})\n`,
-        //         'Files:\n');
-        //     console.log(output);
-        // }
-        // listFiles();
     </script>
 </head>
 <body>
