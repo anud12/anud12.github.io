@@ -13,18 +13,18 @@
     <!-- <script src="https://apis.google.com/js/api.js"></script>
     <script src="https://accounts.google.com/gsi/client"></script> -->
     
-    <script type="module" defer>
+    <script type="module">
         (async () => {
             console.log("Pre import 2");
 
             await new Promise(res => {
-                const node = Document.createElement('script');
+                const node = document.createElement('script');
                 node.setAttribute('src', 'https://apis.google.com/js/api.js');
                 node.addEventListener('load', res);
                 document.querySelector('head').appendChild(node);
             })
             await new Promise(res => {
-                const node = Document.createElement('script');
+                const node = document.createElement('script');
                 node.setAttribute('src', 'https://apis.google.com/js/api.js');
                 node.addEventListener('load', res);
                 document.querySelector('head').appendChild(node);
