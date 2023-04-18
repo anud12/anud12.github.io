@@ -36,7 +36,7 @@ const tokenClientImpl = google.accounts.oauth2.initTokenClient({
 });
 
 const callbackPromise = new Promise((res) => {
-    tokenClient.callback = async (resp) => {
+    tokenClientImpl.callback = async (resp) => {
         if (resp.error !== undefined) {
             throw (resp);
         }
@@ -55,5 +55,5 @@ export default async () => {
         // Skip display of account chooser and consent dialog for an existing session.
         tokenClientImpl.requestAccessToken({ prompt: '' });
     }
-    return {gapiClient, tokenClient}
+    return {gapiClient, tokenClientImpl}
 }
