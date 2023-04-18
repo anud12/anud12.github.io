@@ -15,7 +15,7 @@
     
     <script type="module">
         import {login} from './googleLogin.js';
-        const {gapiClient} = login();
+        const {gapiClient} = await login();
         console.log("Module Loaded");
         async function listFiles() {
             let response;
