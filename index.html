@@ -15,27 +15,30 @@
     
     <script type="module">
         import {gapi} from './googleLogin.js';
-        console.log("Module call");
-        let response;
-        try {
-            response = await gapi.client.drive.files.list({
-                'pageSize': 10,
-                'fields': 'files(id, name)',
-            });
-        } catch (err) {
-            console.error(err.message);
-            return;
+        console.log("Module Loaded");
+        async function listFiles() {
+            let response;
+            try {
+                response = await gapi.client.drive.files.list({
+                    'pageSize': 10,
+                    'fields': 'files(id, name)',
+                });
+            } catch (err) {
+                console.error(err.message);
+                return;
+            }
+            const files = response.result.files;
+            if (!files || files.length == 0) {
+                console.log('No files found.');
+                return;
+            }
+            // Flatten to string to display
+            const output = files.reduce(
+                (str, file) => `${str}${file.name} (${file.id})\n`,
+                'Files:\n');
+            console.log(output);
         }
-        const files = response.result.files;
-        if (!files || files.length == 0) {
-            console.log('No files found.');
-            return;
-        }
-        // Flatten to string to display
-        const output = files.reduce(
-            (str, file) => `${str}${file.name} (${file.id})\n`,
-            'Files:\n');
-        console.log(output);
+        listFiles();
 
     </script>
 </head>
