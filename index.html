@@ -19,13 +19,13 @@
 
             await new Promise(res => {
                 const node = Document.createElement('script');
-                node.attr('src') = 'https://apis.google.com/js/api.js';
+                node.setAttribute('src', 'https://apis.google.com/js/api.js');
                 node.addEventListener('load', res);
                 document.querySelector('head').appendChild(node);
             })
             await new Promise(res => {
                 const node = Document.createElement('script');
-                node.attr('src') = 'https://accounts.google.com/gsi/client';
+                node.setAttribute('src', 'https://apis.google.com/js/api.js');
                 node.addEventListener('load', res);
                 document.querySelector('head').appendChild(node);
             })
