@@ -47,7 +47,6 @@ const callbackPromise = new Promise((res) => {
 
 export default async () => {
     console.log("Google login called");
-    await callbackPromise;
     if (gapi.client.getToken() === null) {
         // Prompt the user to select a Google Account and ask for consent to share their data
         // when establishing a new session.
@@ -56,5 +55,6 @@ export default async () => {
         // Skip display of account chooser and consent dialog for an existing session.
         tokenClientImpl.requestAccessToken({ prompt: '' });
     }
+    await callbackPromise;
     return {gapiClient, tokenClientImpl}
 }
