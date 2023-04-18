@@ -18,20 +18,28 @@
         form.appendChild(node);
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
+            const data = new FormData(document.querySelector('form'));
+
             console.log(e);
             console.log(gapi.client.drive);
             gapi.client.drive.files.create();
             await gapi.client.drive.files.create({
-                resource: {
-                    name: "from browser",
-                    parents: ['1Cn9U7ZJw09ui8zsnkcMbUIeKRp_UJPW3']
-                },
-                media: {
-                    mimeType: 'text/plain',
-                    body: 'Hello world'
-                },
-                fields: 'id'
+                'content-type': 'application/json',
+                uploadType: 'multipart',
+                name: 'name',
+                mimeType: 'ftu.type',
+                fields: 'id, name, kind, size'
             })
+            .then(apiResponse => {
+                fetch(`https://www.googleapis.com/upload/drive/v3/files/${apiResponse.result.id}`, {
+                method: 'PATCH',
+                headers: new Headers({
+                    'Authorization': `Bearer ${gapi.client.getToken().access_token}`,
+                    'Content-Type': 'text/plain'
+                }),
+                body: JSON.stringify(Object.fromEntries(formData))
+            }).then(res => console.log(res))});
+
         })
 
     </script>
@@ -41,13 +49,18 @@
     <div class="container">
         <form>
             <div class="mb-3">
-                <label for="formFile" class="form-label">Default file input example</label>
-                <input class="form-control" type="file" id="formFile">
+                <label for="firstName" class="form-label">Default file input example</label>
+                <input class="form-control" type="text" name='firstName' id="firstName">
             </div>          
-            <select class="form-select" aria-label="Default select example">
-                <option value="12">1 year (12 months)</option>
-                <option value="24" selected>2 years (24 months)</option>
-            </select>
+            <div class="mb-3">
+                <label for="lastName" class="form-label">Default file input example</label>
+                <input class="form-control" type="text" name='lastName' id="lastName">
+            </div>          
+            <div class="mb-3">
+                <label for="noYears" class="form-label">Default file input example</label>
+                <input class="form-control" type="number" value="2" name='noYears' id="noYears">
+            </div>          
+            
         </form>
     </div>
 </body>
