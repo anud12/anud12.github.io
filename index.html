@@ -14,9 +14,9 @@
     <script src="https://accounts.google.com/gsi/client"></script> -->
     
     <script type="module">
-        import {} from './googleLogin.js';
-        async function listFiles() {
-            let response;
+        import {gapi} from './googleLogin.js';
+        console.log("Module call");
+        let response;
             try {
                 response = await gapi.client.drive.files.list({
                     'pageSize': 10,
@@ -36,7 +36,6 @@
                 (str, file) => `${str}${file.name} (${file.id})\n`,
                 'Files:\n');
             console.log(output);
-        }
 
     </script>
 </head>
