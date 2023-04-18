@@ -29,7 +29,7 @@ await gapi.client.init({
         discoveryDocs: [DISCOVERY_DOC],
     });
 
-const tokenClient = google.accounts.oauth2.initTokenClient({
+const tokenClientImpl = google.accounts.oauth2.initTokenClient({
     client_id: CLIENT_ID,
     scope: SCOPES,
     callback: '', // defined later
@@ -45,9 +45,10 @@ const tokenClient = google.accounts.oauth2.initTokenClient({
 if (gapi.client.getToken() === null) {
     // Prompt the user to select a Google Account and ask for consent to share their data
     // when establishing a new session.
-    tokenClient.requestAccessToken({ prompt: 'consent' });
+    tokenClientImpl.requestAccessToken({ prompt: 'consent' });
 } else {
     // Skip display of account chooser and consent dialog for an existing session.
-    tokenClient.requestAccessToken({ prompt: '' });
+    tokenClientImpl.requestAccessToken({ prompt: '' });
 }
-export default {gapi, tokenClient}
+export const gapiClient = gapi;
+export const tokenClient = tokenClient;
