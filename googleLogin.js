@@ -12,6 +12,8 @@ await new Promise(res => {
     node.addEventListener('load', res);
     document.querySelector('head').appendChild(node);
 })
+const gapi = window.gapi;
+
 const CLIENT_ID = '985280907031-ffvfnc8pi0ane99lso9dbl1m2l5oc9nn.apps.googleusercontent.com';
 const API_KEY = 'AIzaSyBtQ2WOyIUnaSWAhl3s5PA_LZkWtpWz5iA';
 
@@ -48,5 +50,4 @@ if (gapi.client.getToken() === null) {
     // Skip display of account chooser and consent dialog for an existing session.
     tokenClient.requestAccessToken({ prompt: '' });
 }
-console.log(window);
-export default {tokenClient}
+export default {gapi, tokenClient}
