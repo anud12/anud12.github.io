@@ -14,7 +14,7 @@
     <script src="https://accounts.google.com/gsi/client"></script> -->
     
     <script type="module">
-        import {login} from './googleLogin.js';
+        import login from './googleLogin.js';
         const {gapiClient} = await login();
         console.log("Module Loaded");
         async function listFiles() {
