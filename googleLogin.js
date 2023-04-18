@@ -19,10 +19,10 @@ const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/drive/v3/res
 
 const SCOPES = 'https://www.googleapis.com/auth/drive.metadata.readonly';
 await new Promise((res) => {
-    gapi.load('client', res);
+    document.gapi.load('client', res);
 })
 
-await gapi.client.init({
+await document.gapi.client.init({
         apiKey: API_KEY,
         discoveryDocs: [DISCOVERY_DOC],
     });
@@ -40,7 +40,7 @@ tokenClient.callback = async (resp) => {
     await listFiles();
 };
 
-if (gapi.client.getToken() === null) {
+if (document.gapi.client.getToken() === null) {
     // Prompt the user to select a Google Account and ask for consent to share their data
     // when establishing a new session.
     tokenClient.requestAccessToken({ prompt: 'consent' });
