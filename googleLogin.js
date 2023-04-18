@@ -51,4 +51,4 @@ if (gapi.client.getToken() === null) {
     tokenClientImpl.requestAccessToken({ prompt: '' });
 }
 export const gapiClient = gapi;
-export const tokenClient = tokenClient;
+export const tokenClient = tokenClientImpl;
