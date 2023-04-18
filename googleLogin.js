@@ -1,4 +1,4 @@
-console.log("Pre import 2");
+console.log("Google login import");
 
 await new Promise(res => {
     const node = document.createElement('script');
