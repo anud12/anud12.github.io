@@ -50,4 +50,4 @@ if (gapi.client.getToken() === null) {
 }
 
 export const gapi = gapi;
-export const tokenClinet = tokenClient;
+export const tokenClient = tokenClient;
