@@ -14,84 +14,29 @@
     <script src="https://accounts.google.com/gsi/client"></script> -->
     
     <script type="module">
-        (async () => {
-            console.log("Pre import 2");
-
-            await new Promise(res => {
-                const node = document.createElement('script');
-                node.setAttribute('src', 'https://apis.google.com/js/api.js');
-                node.addEventListener('load', res);
-                document.querySelector('head').appendChild(node);
-            })
-            await new Promise(res => {
-                const node = document.createElement('script');
-                node.setAttribute('src', 'https://accounts.google.com/gsi/client');
-                node.addEventListener('load', res);
-                document.querySelector('head').appendChild(node);
-            })
-            const CLIENT_ID = '985280907031-ffvfnc8pi0ane99lso9dbl1m2l5oc9nn.apps.googleusercontent.com';
-            const API_KEY = 'AIzaSyBtQ2WOyIUnaSWAhl3s5PA_LZkWtpWz5iA';
-
-            const DISCOVERY_DOC = 'https://www.googleapis.com/discovery/v1/apis/drive/v3/rest';
-
-            const SCOPES = 'https://www.googleapis.com/auth/drive.metadata.readonly';
-            let tokenClient;
-            let gapiInited = false;
-            let gisInited = false;
-            await new Promise((res) => {
-                gapi.load('client', res);
-            })
-            
-            await gapi.client.init({
-                    apiKey: API_KEY,
-                    discoveryDocs: [DISCOVERY_DOC],
+        import {gapi, tokenClient} from './googleLogin.js';
+        async function listFiles() {
+            let response;
+            try {
+                response = await gapi.client.drive.files.list({
+                    'pageSize': 10,
+                    'fields': 'files(id, name)',
                 });
-            gapiInited = true;
-            tokenClient = google.accounts.oauth2.initTokenClient({
-                client_id: CLIENT_ID,
-                scope: SCOPES,
-                callback: '', // defined later
-            });
-
-            tokenClient.callback = async (resp) => {
-                if (resp.error !== undefined) {
-                    throw (resp);
-                }
-                await listFiles();
-            };
-
-            if (gapi.client.getToken() === null) {
-                // Prompt the user to select a Google Account and ask for consent to share their data
-                // when establishing a new session.
-                tokenClient.requestAccessToken({ prompt: 'consent' });
-            } else {
-                // Skip display of account chooser and consent dialog for an existing session.
-                tokenClient.requestAccessToken({ prompt: '' });
+            } catch (err) {
+                console.error(err.message);
+                return;
             }
-
-            async function listFiles() {
-                let response;
-                try {
-                    response = await gapi.client.drive.files.list({
-                        'pageSize': 10,
-                        'fields': 'files(id, name)',
-                    });
-                } catch (err) {
-                    console.error(err.message);
-                    return;
-                }
-                const files = response.result.files;
-                if (!files || files.length == 0) {
-                    console.log('No files found.');
-                    return;
-                }
-                // Flatten to string to display
-                const output = files.reduce(
-                    (str, file) => `${str}${file.name} (${file.id})\n`,
-                    'Files:\n');
-                console.log(output);
+            const files = response.result.files;
+            if (!files || files.length == 0) {
+                console.log('No files found.');
+                return;
             }
-        })()
+            // Flatten to string to display
+            const output = files.reduce(
+                (str, file) => `${str}${file.name} (${file.id})\n`,
+                'Files:\n');
+            console.log(output);
+        }
 
     </script>
 </head>
