@@ -44,6 +44,7 @@ const callbackPromise = new Promise((res) => {
     };
 
 })
+export const drive = window.gapi.client.drive;
 
 export default async () => {
     console.log("Google login called");
