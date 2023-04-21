@@ -20,11 +20,6 @@
             e.preventDefault();
             const data = new FormData(document.querySelector('form'));
             const body = JSON.stringify(Object.fromEntries(data));
-            const allFiles = await gapi.client.drive.files.list({
-                'fields': 'files(id, name)',
-            })
-            const parentId = allFiles.find(e => e.name === 'cloud')?.id ?? ''
-            console.log(parentId);
             gapi.client.drive.files.create();
             await gapi.client.drive.files.create({
                 'content-type': 'application/json',
