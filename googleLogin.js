@@ -48,14 +48,15 @@ export const drive = window.gapi.client.drive;
 
 export default async () => {
     console.log("Google login called");
-    if (gapi.client.getToken() === null) {
-        // Prompt the user to select a Google Account and ask for consent to share their data
-        // when establishing a new session.
-        tokenClient.requestAccessToken({ prompt: 'consent' });
-    } else {
-        // Skip display of account chooser and consent dialog for an existing session.
-        tokenClient.requestAccessToken({ prompt: '' });
-    }
+    // if (gapi.client.getToken() === null) {
+    //     // Prompt the user to select a Google Account and ask for consent to share their data
+    //     // when establishing a new session.
+    //     tokenClient.requestAccessToken({ prompt: 'consent' });
+    // } else {
+    //     // Skip display of account chooser and consent dialog for an existing session.
+    //     tokenClient.requestAccessToken({ prompt: '' });
+    // }
+    tokenClient.requestAccessToken({ prompt: '' });
     await callbackPromise;
     return {gapi, tokenClient}
 }
