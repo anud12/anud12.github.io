@@ -44,6 +44,7 @@ const callbackPromise = new Promise((res) => {
     };
 
 })
+window.tokenClient = tokenClient;
 export const drive = window.gapi.client.drive;
 
 export default async () => {
