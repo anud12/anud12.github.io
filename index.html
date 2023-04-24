@@ -7,70 +7,134 @@
     <title>Anud</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/css/iziToast.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@200&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/normalize.css@8.0.1/normalize.css">
     <script type="module">
-        import * as drive from './drive.js';
-        import * as tokenClient from './token.js';
+        import * as drive from '/drive.js';
+        import * as tokenClient from '/token.js';
 
         await tokenClient.get();
-
-        window.drive = drive;
-        const node = document.createElement('input');
-        node.setAttribute('type', 'submit');
-        const form = document.querySelector('form');
-        form.appendChild(node);
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const data = new FormData(document.querySelector('form'));
-            const body = JSON.stringify(Object.fromEntries(data));
-            const parentId = await drive.findByName('cloud');
-   
-            iziToast.show({
-                title: '1/3',
-                message: 'Found parent'
-            });
-
-            const fileId = await drive.create('first.json', parentId);
-            iziToast.show({
-                title: '2/3  ',
-                message: 'Created file'
-            });
-            await drive.upload(fileId, body)
-            iziToast.show({
-                title: '3/3 ',
-                message: 'Data uploaded',
-                color: 'green'
-            });
-
-        });
     </script>
 </head>
+<style>
+    body {
+        min-height: 100vh;
+        background-color: #f8f9fc; 
+    }
+    .container {
+        display: flex;
+        gap:2rem 1rem;
+        flex: 0;
+        flex-basis: 100%;
+        flex-wrap: wrap;
+        justify-content: start;
+    }
+    .app {
+        width: calc(50% - 2px - 0.5rem );
 
+        height: 175px;
+        border:1px solid #ccd4ec;
+        border-bottom-width: 1px;
+        border-radius: 0.375rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #fff;
+        text-decoration: none;
+    }
+    .app p {
+        color: #000;
+        font-weight: 200;
+        margin:0;
+        margin-top:-10px;
+        margin-bottom: 15px;
+        font-family: 'Raleway', sans-serif;
+        font-size: 34px;
+    }
+    .app svg {
+        fill: #2f5b8e;
+    }
+    @media only screen and (min-width: 768px) {
+        .app {
+            width: calc(33% - 2px - 0.5rem);
+        }
+    }
+    @media only screen and (min-width: 1200px) {
+        .app {
+            width: calc(25% - 2px - 0.5rem);
+        }
+    }
+</style>
 <body>
-    <h1>Anud.ro</h1>
-    <script>
-        document.querySelector('h1').textContent = window.location.origin
-    </script>
     <div class="container">
-        <form>
-            <div class="mb-3">
-                <label for="firstName" class="form-label">Default file input example</label>
-                <input class="form-control" type="text" name='firstName' id="firstName">
-            </div>
-            <div class="mb-3">
-                <label for="lastName" class="form-label">Default file input example</label>
-                <input class="form-control" type="text" name='lastName' id="lastName">
-            </div>
-            <div class="mb-3">
-                <label for="noYears" class="form-label">Default file input example</label>
-                <input class="form-control" type="number" value="2" name='noYears' id="noYears">
-            </div>
-
-        </form>
+        <a class="app" href="./apps">
+            <svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                width="" height="" viewBox="0 0 440 440" xml:space="preserve">
+                <g>
+                    <path d="M439.9,111.711c-0.374-2.142-1.786-3.958-3.77-4.85L274.576,34.147c-2.352-1.06-5.109-0.642-7.04,1.07L220,77.293
+                        l-47.536-42.076c-1.93-1.711-4.688-2.13-7.039-1.07L3.869,106.861c-1.982,0.892-3.395,2.708-3.77,4.85
+                        c-0.375,2.14,0.334,4.328,1.894,5.842l51.033,49.502l-28.774,50.806c-1.781,3.146-0.683,7.14,2.457,8.931l27.964,15.96v65.271
+                        c0,2.342,1.248,4.507,3.274,5.678l158.768,91.85c1.017,0.587,2.15,0.882,3.286,0.882c1.083,0,2.165-0.275,3.146-0.812
+                        c-0.002,0.004-0.008,0.01-0.009,0.014l158.915-91.933c2.026-1.171,3.274-3.336,3.274-5.678v-65.271l27.966-15.96
+                        c3.14-1.791,4.237-5.785,2.455-8.931l-28.772-50.806l51.031-49.502C439.567,116.039,440.277,113.851,439.9,111.711z
+                        M278.612,213.567l-52.052-30.151V96.697l138.129,69.444L278.612,213.567z M75.311,166.142l138.131-69.445v86.719l-52.054,30.151
+                        L75.311,166.142z M18.063,114.861l148.879-67.008l41.454,36.691L62.453,157.918L18.063,114.861z M38.892,218.639l24.854-43.887
+                        l146.41,80.665l-32.483,42.427L38.892,218.639z M213.44,388.497L67.793,304.239v-53.998l108.353,61.839
+                        c1.021,0.583,2.139,0.863,3.248,0.863c1.983,0,3.932-0.9,5.214-2.573l28.833-37.659L213.44,388.497L213.44,388.497z M220,245.861
+                        l-45.196-24.901L220,194.78l45.196,26.18L220,245.861z M372.206,304.239l-145.646,84.258V272.71l28.833,37.659
+                        c1.28,1.673,3.229,2.573,5.214,2.573c1.106,0,2.227-0.28,3.248-0.863l108.351-61.839V304.239z M401.109,218.639l-138.781,79.204
+                        l-32.484-42.427l146.411-80.665L401.109,218.639z M377.548,157.918L231.604,84.544l41.452-36.691l148.881,67.008L377.548,157.918z"
+                        />
+                </g>
+            </svg>
+            <p>Boxes</p>
+        </a>
+        <a class="app" href="./apps">
+            <svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                width="" height="" viewBox="0 0 440 440" xml:space="preserve">
+                <g>
+                    <path d="M439.9,111.711c-0.374-2.142-1.786-3.958-3.77-4.85L274.576,34.147c-2.352-1.06-5.109-0.642-7.04,1.07L220,77.293
+                        l-47.536-42.076c-1.93-1.711-4.688-2.13-7.039-1.07L3.869,106.861c-1.982,0.892-3.395,2.708-3.77,4.85
+                        c-0.375,2.14,0.334,4.328,1.894,5.842l51.033,49.502l-28.774,50.806c-1.781,3.146-0.683,7.14,2.457,8.931l27.964,15.96v65.271
+                        c0,2.342,1.248,4.507,3.274,5.678l158.768,91.85c1.017,0.587,2.15,0.882,3.286,0.882c1.083,0,2.165-0.275,3.146-0.812
+                        c-0.002,0.004-0.008,0.01-0.009,0.014l158.915-91.933c2.026-1.171,3.274-3.336,3.274-5.678v-65.271l27.966-15.96
+                        c3.14-1.791,4.237-5.785,2.455-8.931l-28.772-50.806l51.031-49.502C439.567,116.039,440.277,113.851,439.9,111.711z
+                        M278.612,213.567l-52.052-30.151V96.697l138.129,69.444L278.612,213.567z M75.311,166.142l138.131-69.445v86.719l-52.054,30.151
+                        L75.311,166.142z M18.063,114.861l148.879-67.008l41.454,36.691L62.453,157.918L18.063,114.861z M38.892,218.639l24.854-43.887
+                        l146.41,80.665l-32.483,42.427L38.892,218.639z M213.44,388.497L67.793,304.239v-53.998l108.353,61.839
+                        c1.021,0.583,2.139,0.863,3.248,0.863c1.983,0,3.932-0.9,5.214-2.573l28.833-37.659L213.44,388.497L213.44,388.497z M220,245.861
+                        l-45.196-24.901L220,194.78l45.196,26.18L220,245.861z M372.206,304.239l-145.646,84.258V272.71l28.833,37.659
+                        c1.28,1.673,3.229,2.573,5.214,2.573c1.106,0,2.227-0.28,3.248-0.863l108.351-61.839V304.239z M401.109,218.639l-138.781,79.204
+                        l-32.484-42.427l146.411-80.665L401.109,218.639z M377.548,157.918L231.604,84.544l41.452-36.691l148.881,67.008L377.548,157.918z"
+                        />
+                </g>
+            </svg>
+            <p>Boxes</p>
+        </a>
+        <a class="app" href="./apps">
+            <svg fill="#000000" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                width="" height="" viewBox="0 0 440 440" xml:space="preserve">
+                <g>
+                    <path d="M439.9,111.711c-0.374-2.142-1.786-3.958-3.77-4.85L274.576,34.147c-2.352-1.06-5.109-0.642-7.04,1.07L220,77.293
+                        l-47.536-42.076c-1.93-1.711-4.688-2.13-7.039-1.07L3.869,106.861c-1.982,0.892-3.395,2.708-3.77,4.85
+                        c-0.375,2.14,0.334,4.328,1.894,5.842l51.033,49.502l-28.774,50.806c-1.781,3.146-0.683,7.14,2.457,8.931l27.964,15.96v65.271
+                        c0,2.342,1.248,4.507,3.274,5.678l158.768,91.85c1.017,0.587,2.15,0.882,3.286,0.882c1.083,0,2.165-0.275,3.146-0.812
+                        c-0.002,0.004-0.008,0.01-0.009,0.014l158.915-91.933c2.026-1.171,3.274-3.336,3.274-5.678v-65.271l27.966-15.96
+                        c3.14-1.791,4.237-5.785,2.455-8.931l-28.772-50.806l51.031-49.502C439.567,116.039,440.277,113.851,439.9,111.711z
+                        M278.612,213.567l-52.052-30.151V96.697l138.129,69.444L278.612,213.567z M75.311,166.142l138.131-69.445v86.719l-52.054,30.151
+                        L75.311,166.142z M18.063,114.861l148.879-67.008l41.454,36.691L62.453,157.918L18.063,114.861z M38.892,218.639l24.854-43.887
+                        l146.41,80.665l-32.483,42.427L38.892,218.639z M213.44,388.497L67.793,304.239v-53.998l108.353,61.839
+                        c1.021,0.583,2.139,0.863,3.248,0.863c1.983,0,3.932-0.9,5.214-2.573l28.833-37.659L213.44,388.497L213.44,388.497z M220,245.861
+                        l-45.196-24.901L220,194.78l45.196,26.18L220,245.861z M372.206,304.239l-145.646,84.258V272.71l28.833,37.659
+                        c1.28,1.673,3.229,2.573,5.214,2.573c1.106,0,2.227-0.28,3.248-0.863l108.351-61.839V304.239z M401.109,218.639l-138.781,79.204
+                        l-32.484-42.427l146.411-80.665L401.109,218.639z M377.548,157.918L231.604,84.544l41.452-36.691l148.881,67.008L377.548,157.918z"
+                        />
+                </g>
+            </svg>
+            <p>Boxes</p>
+        </a>
+        
     </div>
 </body>
 

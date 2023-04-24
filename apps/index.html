@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="description" content="" />
+    <meta charset="utf-8">
+    <title>Anud</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/css/iziToast.min.css">
+    <script type="module">
+        import * as drive from '/drive.js';
+        import * as tokenClient from '/token.js';
+
+        await tokenClient.get();
+
+        window.drive = drive;
+        const node = document.createElement('input');
+        node.setAttribute('type', 'submit');
+        const form = document.querySelector('form');
+        form.appendChild(node);
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = new FormData(document.querySelector('form'));
+            const body = JSON.stringify(Object.fromEntries(data));
+            const parentId = await drive.findByName('cloud');
+   
+            iziToast.show({
+                title: '1/3',
+                message: 'Found parent'
+            });
+
+            const fileId = await drive.create('first.json', parentId);
+            iziToast.show({
+                title: '2/3  ',
+                message: 'Created file'
+            });
+            await drive.upload(fileId, body)
+            iziToast.show({
+                title: '3/3 ',
+                message: 'Data uploaded',
+                color: 'green'
+            });
+
+        });
+    </script>
+</head>
+
+<body>
+    <h1>Anud.ro</h1>
+    <script>
+        document.querySelector('h1').textContent = window.location.origin
+    </script>
+    <div class="container">
+        <form>
+            <div class="mb-3">
+                <label for="firstName" class="form-label">Default file input example</label>
+                <input class="form-control" type="text" name='firstName' id="firstName">
+            </div>
+            <div class="mb-3">
+                <label for="lastName" class="form-label">Default file input example</label>
+                <input class="form-control" type="text" name='lastName' id="lastName">
+            </div>
+            <div class="mb-3">
+                <label for="noYears" class="form-label">Default file input example</label>
+                <input class="form-control" type="number" value="2" name='noYears' id="noYears">
+            </div>
+
+        </form>
+    </div>
+</body>
+
+</html>
