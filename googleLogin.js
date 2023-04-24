@@ -34,6 +34,7 @@ const tokenClient = google.accounts.oauth2.initTokenClient({
     scope: SCOPES,
     callback: '', // defined later
 });
+window.tokenClient = tokenClient;
 
 const callbackPromise = new Promise((res) => {
     tokenClient.callback = async (resp) => {
