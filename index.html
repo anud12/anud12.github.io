@@ -12,7 +12,9 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/izitoast/1.4.0/js/iziToast.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/izitoast@1.4.0/dist/css/iziToast.min.css">
-
+    <script>
+        document.querySelector('h1').textContent = window.location.origin
+    </script>
     <script type="module">
         import * as drive from './drive.js';
         import * as tokenClient from './token.js';
