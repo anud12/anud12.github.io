@@ -24,58 +24,28 @@ export const findByName = async (
 /**@returns string */
 export const create = async (/**@type string*/ name, /**@type string */ parent) => {
     const token = await tokenApi.get();
-    return fetch("https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart", {
+    return fetch("https://www.googleapis.com/upload/drive/v3/files?uploadType=resumable", {
         method: "POST",
         headers: new Headers({
             'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json; charset=UTF-8'
         }),
         body: JSON.stringify({
             name,
             parents: [parent]
         })
     }).then(async apiResponse => {
-        return (await apiResponse.json())?.id
+        return (await apiResponse.headers.get('Location'))
     })
 }
 export const upload = async (/**@type string*/ id, /**@type string */ body) => {
     const token = await tokenApi.get();
-    return fetch(`https://www.googleapis.com/upload/drive/v3/files/${id}`, {
-        method: 'PATCH',
+    return fetch(id, {
+        method: 'PUT',
         headers: new Headers({
             'Authorization': `Bearer ${token}`,
-            'Content-Type': 'text/plain'
+            'Content-Type': 'application/json'
         }),
         body: body
     }).then(res => console.log(res))
 };
-
-export const save = async (
-    /** @type string */
-    parent,
-    /** @type string */
-    filename,
-    /** @type string */
-    data) => {
-    const token = await tokenApi.get();
-    /** @type Array */
-    const files = await fetch(`https://www.googleapis.com/drive/v3/files`, {
-        headers: new Headers({
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'text/plain'
-        }),
-    })
-        .then(async e => {
-            return (await e.json())?.files ?? [];
-        });
-    console.log(files);
-    // .then(apiResponse => {
-    //     fetch(`https://www.googleapis.com/upload/drive/v3/files/${apiResponse.result.id}`, {
-    //     method: 'PATCH',
-    //     headers: new Headers({
-    //         'Authorization': `Bearer ${gapi.client.getToken().access_token}`,
-    //         'Content-Type': 'text/plain'
-    //     }),
-    //     body: body
-    // }).then(res => console.log(res))});
-}
