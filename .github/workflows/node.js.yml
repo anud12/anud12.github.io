@@ -19,7 +19,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-      submodules: 'true'
+      
+    - name: Checkout submodules
+      run: git submodule update --init --recursive
     - name: Use Node.js 18.x
       uses: actions/setup-node@v3
       with:
