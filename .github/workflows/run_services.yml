@@ -27,9 +27,9 @@ jobs:
       with:
         node-version: 18.x
         cache: npm
-        cache-dependency-path: *path
+        cache-dependency-path: ./boxes/service
     - name: Run Boxes 
-      working-directory: *path
+      working-directory: ./boxes/service
       run: |
         npm ci
         npm start
