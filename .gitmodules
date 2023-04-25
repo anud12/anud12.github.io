@@ -1,3 +1,6 @@
 [submodule "boxes"]
 	path = boxes
 	url = https://github.com/anud12/anud12.github.io_boxes.git
+[submodule "anud12.github.io_boxes"]
+	path = anud12.github.io_boxes
+	url = https://github.com/anud12/anud12.github.io_boxes.git
