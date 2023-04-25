@@ -16,7 +16,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    path: &path ./boxes/service
     steps:
     - uses: actions/checkout@v3
       
