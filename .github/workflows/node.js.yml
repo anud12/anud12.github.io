@@ -25,8 +25,6 @@ jobs:
       with:
         node-version: 18.x
     - run: npm ci
-      working-directory: service
-    - run: npm run build --if-present
-      working-directory: service
+      working-directory: boxes/service
     - run: npm start
-      working-directory: service
+      working-directory: boxes/service
