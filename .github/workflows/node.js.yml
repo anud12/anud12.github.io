@@ -25,6 +25,6 @@ jobs:
       with:
         node-version: 18.x
     - run: npm ci
-      working-directory: boxes/service
+      working-directory: ./boxes/service
     - run: npm start
-      working-directory: boxes/service
+      working-directory: ./boxes/service
