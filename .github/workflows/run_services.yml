@@ -25,6 +25,8 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: 18.x
+        cache: npm
+        cache-dependency-path: ./boxes/service
     - name: Run Boxes 
       working-directory: ./boxes/service
       run: |
