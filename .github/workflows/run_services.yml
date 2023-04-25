@@ -12,28 +12,25 @@ on:
   # pull_request:
   #   branches: [ "master" ]
 
-anchored_content: 
-  path: &path ./
-  build: &build_node
-    runs-on: ubuntu-latest
-      steps:
-      - uses: actions/checkout@v3
-        
-      - name: Checkout submodules
-        run: git submodule update --init --recursive
-      - name: Use Node.js 18.x
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18.x
-          cache: npm
-          cache-dependency-path: &path
-      - name: Run Boxes 
-        working-directory: &path
-        run: |
-          npm ci
-          npm start
 
 jobs:
-  &path ./boxes/service
-  build: *build_node
+  build:
+    runs-on: ubuntu-latest
+    path: &path ./boxes/service
+    steps:
+    - uses: actions/checkout@v3
+      
+    - name: Checkout submodules
+      run: git submodule update --init --recursive
+    - name: Use Node.js 18.x
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18.x
+        cache: npm
+        cache-dependency-path: *path
+    - name: Run Boxes 
+      working-directory: *path
+      run: |
+        npm ci
+        npm start
       
