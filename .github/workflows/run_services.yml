@@ -24,5 +24,6 @@ jobs:
     - name: Debug
       run: ls -al ./boxes
     - name: Run Boxes 
-      run: ./boxes/exe
+      working-directory: ./boxes
+      run: ./exe
       
