@@ -16,10 +16,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    - name: Loading secrets
-      env:
-        CLIENT_EMAIL: ${{ secrets.CLIENT_EMAIL}}
-        PRIVATE_KEY: ${{ secrets.PRIVATE_KEY}}
     - uses: actions/checkout@v3
     - name: Checkout submodules
       run: git submodule update --init --remote --merge --recursive
@@ -29,6 +25,9 @@ jobs:
       shell: bash
 
     - name: Run Boxes 
+      env:
+        CLIENT_EMAIL: ${{ secrets.CLIENT_EMAIL}}
+        PRIVATE_KEY: ${{ secrets.PRIVATE_KEY}}
       working-directory: ./boxes
       run: ls -al && ./exe
       
