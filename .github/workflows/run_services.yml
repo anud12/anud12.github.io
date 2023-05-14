@@ -21,6 +21,8 @@ jobs:
       
     - name: Checkout submodules
       run: git submodule update --init --remote --merge --recursive
+    - name: Debug
+      run: ls -al ./boxes
     - name: Run Boxes 
       run: ./boxes/exe
       
