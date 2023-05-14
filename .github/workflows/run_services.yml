@@ -25,5 +25,5 @@ jobs:
       run: ls -al ./boxes
     - name: Run Boxes 
       working-directory: ./boxes
-      run: ./exe
+      run: exe
       
