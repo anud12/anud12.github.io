@@ -16,16 +16,18 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
+    - name: Loading secrets
+      env:
+        CLIENT_EMAIL: ${{ secrets.CLIENT_EMAIL}}
+        PRIVATE_KEY: ${{ secrets.PRIVATE_KEY}}
     - uses: actions/checkout@v3
-      
     - name: Checkout submodules
       run: git submodule update --init --remote --merge --recursive
 
     - name: Set GIHUB_PATH 
       run: echo "${{ github.action_path }}" >> $GITHUB_PATH
       shell: bash
-      
+
     - name: Run Boxes 
       working-directory: ./boxes
       run: ls -al && ./exe
