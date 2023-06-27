@@ -1,0 +1,15 @@
+{
+  "name": "anud12.github.io",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "node ./build.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "anud12.github.io_ui_compiler": "github:anud12/anud12.github.io_ui_compiler",
+    "anud12.github.io_ui_base": "github:anud12/anud12.github.io_ui_base"
+  }
+}
