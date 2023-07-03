@@ -12,3 +12,6 @@
 [submodule "ui_compiler"]
 	path = ui_compiler
 	url = https://github.com/anud12/anud12.github.io_ui_compiler.git
+[submodule "#job_base"]
+	path = "#job_base"
+	url = https://github.com/anud12/anud12.github.io_job_base.git
