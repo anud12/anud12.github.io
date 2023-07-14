@@ -23,7 +23,7 @@ jobs:
       with:
         node-version: '16.x'
 
-    - run: git submodule update boxes
+    - run: git submodule update --init boxes
     - run: npm i
       working-directory: "boxes/#"
     - run: npm run job
