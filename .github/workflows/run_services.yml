@@ -9,8 +9,6 @@ on:
     - cron:  '0/15 * * * *'
   push:
     branches: [ "master" ]
-  # pull_request:
-  #   branches: [ "master" ]
 
 
 jobs:
@@ -20,14 +18,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-      
     - name: Checkout submodules
       run: git submodule update --init --remote --merge --recursive
-            
-    - name: Run Boxes 
-      working-directory: ./boxes
-      env:
-        CLIENT_EMAIL: ${{ secrets.CLIENT_EMAIL}}
-        PRIVATE_KEY: ${{ secrets.PRIVATE_KEY}}
-      run: ./exe
-      
+    - name: Use Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: '16.x'
+
+    - run: npm i
+      working-directory: "boxes"
+    - run: npm run job
+      working-directory: "boxes"
+
