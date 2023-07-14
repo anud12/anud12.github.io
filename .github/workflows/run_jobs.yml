@@ -22,9 +22,6 @@ jobs:
       uses: actions/setup-node@v3
       with:
         node-version: '16.x'
-    - name: Checkout boxes
-      working-directory: "boxes"
-      run: git pull
     - run: npm i
       working-directory: "boxes/#"
     - run: npm run job
