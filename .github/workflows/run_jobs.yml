@@ -26,9 +26,9 @@ jobs:
         node-version: '16.x'
 
     - run: npm i
-      working-directory: "boxes"
+      working-directory: "boxes/#"
     - run: npm run job
-      working-directory: "boxes"
+      working-directory: "boxes/#"
       env:
         CLIENT_EMAIL: ${{ secrets.CLIENT_EMAIL}}
         PRIVATE_KEY: ${{ secrets.PRIVATE_KEY}}
