@@ -18,13 +18,13 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Checkout submodules
-      run: git submodule update --init --remote --merge --recursive
     - name: Use Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '16.x'
-
+    - name: Checkout boxes
+      working-directory: "boxes"
+      run: git pull
     - run: npm i
       working-directory: "boxes/#"
     - run: npm run job
