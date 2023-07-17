@@ -3,12 +3,12 @@
 
 name: Run Jobs
 
-#on:
+on:
 #  schedule:
     # * is a special character in YAML so you have to quote this string
 #    - cron:  '0/15 * * * *'
-#  push:
-#    branches: [ "master" ]
+  push:
+    branches: [ "noOp" ]
 
 
 jobs:
