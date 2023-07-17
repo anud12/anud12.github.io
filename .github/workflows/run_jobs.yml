@@ -25,9 +25,7 @@ jobs:
         node-version: '16.x'
 
     - run: git submodule update --init boxes
-    - run: npm i
-      working-directory: "boxes/#"
-    - run: npm run job
+    - run: node job.js
       working-directory: "boxes/#"
       env:
         CLIENT_EMAIL: ${{ secrets.CLIENT_EMAIL}}
